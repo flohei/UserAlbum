@@ -17,6 +17,9 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
+        // Set a localized title for this view controller
+        self.navigationItem.title = NSLocalizedString("USERS_TITLE", comment: "The title for the navigation item on the user table.")
+        
         let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
         dataManager.downloadUsers()
     }

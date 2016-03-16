@@ -37,6 +37,7 @@
 		8F885CC91C99E3610034BF33 /* notes.md in Sources */ = {isa = PBXBuildFile; fileRef = 8F885CC81C99E3610034BF33 /* notes.md */; };
 		8F885CF21C99E4400034BF33 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F885CDA1C99E3E10034BF33 /* Kingfisher.framework */; };
 		8F885CF41C99E49D0034BF33 /* Kingfisher.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8F885CDA1C99E3E10034BF33 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8F885CF71C99E7D90034BF33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F885CF91C99E7D90034BF33 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,10 @@
 		8F885CC41C99973D0034BF33 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8F885CC81C99E3610034BF33 /* notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
 		8F885CCA1C99E3E10034BF33 /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = Kingfisher/Kingfisher.xcodeproj; sourceTree = SOURCE_ROOT; };
+		8F885CF81C99E7D90034BF33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8F885CFA1C99E8060034BF33 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8F885CFB1C99E8130034BF33 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8F885CFC1C99E8E50034BF33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +278,7 @@
 				8F4C05C31C988C8900162834 /* Main.storyboard */,
 				8F4C05C61C988C8900162834 /* Assets.xcassets */,
 				8F4C05BC1C988C8900162834 /* UserAlbum.xcdatamodeld */,
+				8F885CF91C99E7D90034BF33 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -391,6 +397,8 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				de,
 			);
 			mainGroup = 8F4C05AE1C988C8900162834;
 			productRefGroup = 8F4C05B81C988C8900162834 /* Products */;
@@ -502,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F4C05CA1C988C8900162834 /* LaunchScreen.storyboard in Resources */,
+				8F885CF71C99E7D90034BF33 /* Localizable.strings in Resources */,
 				8F4C05C71C988C8900162834 /* Assets.xcassets in Resources */,
 				8F4C05C51C988C8900162834 /* Main.storyboard in Resources */,
 			);
@@ -581,6 +590,17 @@
 				8F4C05C91C988C8900162834 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8F885CF91C99E7D90034BF33 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F885CF81C99E7D90034BF33 /* Base */,
+				8F885CFA1C99E8060034BF33 /* fr */,
+				8F885CFB1C99E8130034BF33 /* de */,
+				8F885CFC1C99E8E50034BF33 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

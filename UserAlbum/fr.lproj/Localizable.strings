@@ -1,0 +1,10 @@
+/* 
+  Strings.strings
+  UserAlbum
+
+  Created by Florian Heiber on 16.03.16.
+  Copyright © 2016 Florian Heiber. All rights reserved.
+*/
+
+/* The title for the navigation item on the user table. */
+"USERS_TITLE" = "Utilisateur";
