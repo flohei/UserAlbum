@@ -141,7 +141,7 @@ class DataManager: NSObject, APIAccessorDelegate {
         switch endpoint {
         case .Users:
             /**
-                This is the user case. A user consists of multiple fields, including the name, email address, geo, and company information. For the sake of this demo we're only interested in the name, the email address and the company's catch phrase.
+             This is the user case. A user consists of multiple fields, including the name, email address, geo, and company information. For the sake of this demo we're only interested in the name, the email address and the company's catch phrase.
             */
             for userDictionary in theResults {
                 // Check if we already have this user. If so, don't create it.
@@ -180,7 +180,7 @@ class DataManager: NSObject, APIAccessorDelegate {
             
         case .Albums:
             /**
-                This case handles all the user albums. It stores their identifier and title and assigns it to a user. The case where an album references a non-existent user id is TBD. For now we're dropping the album.
+             This case handles all the user albums. It stores their identifier and title and assigns it to a user. The case where an album references a non-existent user id is TBD. For now we're dropping the album.
             */
             for albumDictionary in theResults {
                 // Check if we already have this album. If so, don't create it.
@@ -213,7 +213,7 @@ class DataManager: NSObject, APIAccessorDelegate {
             
         case .Photos:
             /**
-            This case handles all the photos. It stores their identifier, title, and photo URLs and assigns it to an album. The case where a photo references a non-existent user id is TBD. For now we're dropping the photo.
+             This case handles all the photos. It stores their identifier, title, and photo URLs and assigns it to an album. The case where a photo references a non-existent user id is TBD. For now we're dropping the photo.
             */
             for photoDictionary in theResults {
                 // Check if we already have this photo. If so, don't create it.

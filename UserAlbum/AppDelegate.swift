@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         let dataManager = DataManager()
-        dataManager.downloadData()
         
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController

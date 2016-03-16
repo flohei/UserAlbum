@@ -16,6 +16,9 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
+        dataManager.downloadUsers()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -31,6 +34,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
             let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
                 let controller = segue.destinationViewController as! AlbumsViewController
                 controller.user = object as? User
+                controller.managedObjectContext = self.managedObjectContext
             }
         }
     }
@@ -47,7 +51,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath)
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -75,7 +79,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        cell.textLabel!.text = object.valueForKey("name")!.description
+        (cell as? UserCell)?.user = object as? User
     }
 
     // MARK: - Fetched results controller
@@ -100,7 +104,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
