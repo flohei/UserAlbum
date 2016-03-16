@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Event">
-        <attribute name="timeStamp" optional="YES" attributeType="Date"/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Album" representedClassName="Album" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="photos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="album" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="albums" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="photos" inverseEntity="Album" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User">
+        <attribute name="companyCatchPhrase" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="user" inverseEntity="Album" syncable="YES"/>
+        <userInfo/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="User" positionX="261" positionY="189" width="128" height="120"/>
+        <element name="Album" positionX="261" positionY="198" width="128" height="105"/>
+        <element name="Photo" positionX="270" positionY="207" width="128" height="120"/>
     </elements>
 </model>
