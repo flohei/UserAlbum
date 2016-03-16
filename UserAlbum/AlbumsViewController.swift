@@ -10,17 +10,15 @@ import UIKit
 import CoreData
 
 class AlbumsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    var user: User? = nil
-    var detailViewController: DetailViewController? = nil
+    var user: User? = nil {
+        didSet {
+            self.navigationItem.title = user?.identifier?.stringValue
+        }
+    }
     var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
         
         let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
         dataManager.downloadAlbums()
@@ -34,13 +32,12 @@ class AlbumsViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == "showPhotos" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                let controller = segue.destinationViewController as! PhotosViewController
+                controller.album = object as? Album
+                controller.managedObjectContext = self.managedObjectContext
             }
         }
     }

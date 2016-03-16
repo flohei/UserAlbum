@@ -34,10 +34,10 @@
 		8F4C060A1C98B48F00162834 /* _Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C05F11C988F9400162834 /* _Album.swift */; };
 		8F4C060B1C98B49300162834 /* _Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C05F21C988F9400162834 /* _Photo.swift */; };
 		8F885CC51C99973D0034BF33 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F885CC41C99973D0034BF33 /* UserCell.swift */; };
-		8F885CC91C99E3610034BF33 /* notes.md in Sources */ = {isa = PBXBuildFile; fileRef = 8F885CC81C99E3610034BF33 /* notes.md */; };
 		8F885CF21C99E4400034BF33 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F885CDA1C99E3E10034BF33 /* Kingfisher.framework */; };
 		8F885CF41C99E49D0034BF33 /* Kingfisher.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8F885CDA1C99E3E10034BF33 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8F885CF71C99E7D90034BF33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F885CF91C99E7D90034BF33 /* Localizable.strings */; };
+		8F885CFE1C99EE320034BF33 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F885CFD1C99EE320034BF33 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +178,7 @@
 		8F885CFA1C99E8060034BF33 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8F885CFB1C99E8130034BF33 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8F885CFC1C99E8E50034BF33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8F885CFD1C99EE320034BF33 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +268,7 @@
 				8F4C06001C98AC9700162834 /* PhotosViewController.swift */,
 				8F4C05C11C988C8900162834 /* DetailViewController.swift */,
 				8F885CC41C99973D0034BF33 /* UserCell.swift */,
+				8F885CFD1C99EE320034BF33 /* PhotoCell.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -530,11 +532,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F885CC91C99E3610034BF33 /* notes.md in Sources */,
 				8F4C05F51C988F9400162834 /* Photo.swift in Sources */,
 				8F4C05FD1C989B6300162834 /* DataManager.swift in Sources */,
 				8F4C05BE1C988C8900162834 /* UserAlbum.xcdatamodeld in Sources */,
 				8F4C05F91C988F9400162834 /* _User.swift in Sources */,
+				8F885CFE1C99EE320034BF33 /* PhotoCell.swift in Sources */,
 				8F4C05BB1C988C8900162834 /* AppDelegate.swift in Sources */,
 				8F4C05C01C988C8900162834 /* UsersViewController.swift in Sources */,
 				8F4C05FB1C988FB200162834 /* APIAccessor.swift in Sources */,
