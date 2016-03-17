@@ -9,6 +9,14 @@
 import CoreData
 
 class DataManager: NSObject, APIAccessorDelegate {
+    /// The object that does the actual API access.
+    var accessor: APIAccessor!
+    
+    override init() {
+        super.init()
+        accessor = APIAccessor(delegate: self)
+    }
+    
     /**
      Loads all users from the local database.
      - returns: An array of User objects.
@@ -85,8 +93,7 @@ class DataManager: NSObject, APIAccessorDelegate {
         
         fetchRequest.predicate = NSPredicate(format: "identifier == %i", id)
         fetchRequest.entity = emergencyContactEntityDescription
-        let albums = (try! managedObjectContext.executeFetchRequest(fetchRequest)) as! [Album]
-        
+        let albums = (try! managedObjectContext.executeFetchRequest(fetchRequest)) as! [Album]        
         return albums.first
     }
     
@@ -127,7 +134,6 @@ class DataManager: NSObject, APIAccessorDelegate {
     }
     
     private func downloadEntity(entity: APIAccessorEndpoint) {
-        let accessor = APIAccessor(delegate: self)
         accessor.queryAPIForEndpoint(entity)
     }
     
@@ -145,21 +151,21 @@ class DataManager: NSObject, APIAccessorDelegate {
             */
             for userDictionary in theResults {
                 // Check if we already have this user. If so, don't create it.
-                let identifier = userDictionary["id"] as? Int
+                let identifier = userDictionary["id"] as? NSNumber
                 guard let theIdentifier = identifier else {
                     continue
                 }
                 
-                let theUser = user(withID: theIdentifier)
+                let theUser = user(withID: theIdentifier.integerValue)
                 if theUser != nil {
                     continue
                 }
                 
                 // Go through all the fields in the dictionary and get the data out.
                 
-                let name = userDictionary["name"] as? String
+                let name: String? = userDictionary["name"] as? String
                 let email = userDictionary["email"] as? String
-                let company = userDictionary["company"] as? NSDictionary
+                let company = userDictionary["company"] as? [String: AnyObject]
                 // We could alternatively get the entire company object here and store it in the database or assign the user if we already have that company.
                 guard let theCompany = company else {
                     print("No company object, therefore no company catch phrase")
@@ -184,21 +190,21 @@ class DataManager: NSObject, APIAccessorDelegate {
             */
             for albumDictionary in theResults {
                 // Check if we already have this album. If so, don't create it.
-                let identifier = albumDictionary["id"] as? Int
+                let identifier = albumDictionary["id"] as? NSNumber
                 guard let theIdentifier = identifier else {
                     continue
                 }
                 
-                let theAlbum = album(withID: theIdentifier)
+                let theAlbum = album(withID: theIdentifier.integerValue)
                 if theAlbum != nil {
                     continue
                 }
                 
-                let userID = albumDictionary["userId"] as? Int
+                let userID = albumDictionary["userId"] as? NSNumber
                 let title = albumDictionary["title"] as? String
                 
                 // Get the user to assign it to the album afterwards.
-                guard let theUser = user(withID: userID!) else {
+                guard let theUser = user(withID: userID!.integerValue) else {
                     continue
                 }
                 
@@ -217,23 +223,28 @@ class DataManager: NSObject, APIAccessorDelegate {
             */
             for photoDictionary in theResults {
                 // Check if we already have this photo. If so, don't create it.
-                let identifier = photoDictionary["id"] as? Int
+                let identifier = photoDictionary["id"] as? NSNumber
                 guard let theIdentifier = identifier else {
                     continue
                 }
                 
-                let thePhoto = photo(withID: theIdentifier)
+                let thePhoto = photo(withID: theIdentifier.integerValue)
                 if thePhoto != nil {
                     continue
                 }
                 
-                let albumID = photoDictionary["albumId"] as? Int
+                let albumID = photoDictionary["albumId"] as? NSNumber
                 let title = photoDictionary["title"] as? String
                 let imageAddress = photoDictionary["url"] as? String
                 let imageThumbnailAddress = photoDictionary["thumbnailUrl"] as? String
                 
+                // If any of these is nil we'll skip this photo.
+                if albumID == nil || title == nil || imageAddress == nil || imageThumbnailAddress == nil {
+                    continue
+                }
+                
                 // Get the album to assign it to the photo afterwards.
-                guard let theAlbum = album(withID: albumID!) else {
+                guard let theAlbum = album(withID: (albumID?.integerValue)!) else {
                     continue
                 }
                 
@@ -246,6 +257,7 @@ class DataManager: NSObject, APIAccessorDelegate {
                 
                 saveContext()
             }
+            
             break
         }
     }

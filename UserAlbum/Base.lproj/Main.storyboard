@@ -185,7 +185,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="80" id="vtr-tr-zwt">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="80" id="vtr-tr-zwt" customClass="PhotoCell" customModule="UserAlbum" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vtr-tr-zwt" id="HxQ-mS-OTj">
@@ -203,6 +203,10 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="thumbnailView" destination="fRJ-ZM-UiC" id="e3S-Du-lwh"/>
+                                    <outlet property="titleLabel" destination="jZD-0G-WVN" id="joU-oF-QvK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
