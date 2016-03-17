@@ -33,25 +33,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="20" y="292" width="560" height="17"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pfR-da-53J">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
-                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
+                            <constraint firstItem="pfR-da-53J" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="9yY-rl-Z4G"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="pfR-da-53J" secondAttribute="bottom" id="htN-IR-RLt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pfR-da-53J" secondAttribute="trailing" constant="-20" id="kBq-wz-1K5"/>
+                            <constraint firstItem="pfR-da-53J" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="sWG-Nw-iBb"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
+                        <outlet property="detailImageView" destination="pfR-da-53J" id="IF4-38-0yS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -192,20 +189,38 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fRJ-ZM-UiC">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fRJ-ZM-UiC">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="ArQ-nr-Bl4"/>
+                                                <constraint firstAttribute="width" constant="64" id="hbT-8D-Nn7"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZD-0G-WVN">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZD-0G-WVN">
                                             <rect key="frame" x="80" y="29" width="512" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fRJ-ZM-UiC" firstAttribute="leading" secondItem="HxQ-mS-OTj" secondAttribute="leadingMargin" id="LFz-a5-mc6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jZD-0G-WVN" secondAttribute="trailing" id="P1y-5b-yuv"/>
+                                        <constraint firstItem="jZD-0G-WVN" firstAttribute="leading" secondItem="fRJ-ZM-UiC" secondAttribute="trailing" constant="8" id="SXy-Oy-zhR"/>
+                                        <constraint firstItem="fRJ-ZM-UiC" firstAttribute="centerY" secondItem="HxQ-mS-OTj" secondAttribute="centerY" id="U3I-eQ-hJX"/>
+                                        <constraint firstItem="jZD-0G-WVN" firstAttribute="centerY" secondItem="HxQ-mS-OTj" secondAttribute="centerY" id="a6T-zF-QiB"/>
+                                        <constraint firstItem="jZD-0G-WVN" firstAttribute="centerX" secondItem="HxQ-mS-OTj" secondAttribute="centerX" id="e3n-FL-ub4"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="e3n-FL-ub4"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="thumbnailView" destination="fRJ-ZM-UiC" id="e3S-Du-lwh"/>
                                     <outlet property="titleLabel" destination="jZD-0G-WVN" id="joU-oF-QvK"/>
+                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="WmK-cY-ab9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -235,4 +250,7 @@
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="WmK-cY-ab9"/>
+    </inferredMetricsTieBreakers>
 </document>
