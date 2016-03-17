@@ -91,7 +91,7 @@ class PhotosViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        cell.textLabel!.text = object.valueForKey("title")!.description
+        (cell as! PhotoCell).photo = (object as! Photo)
     }
     
     // MARK: - Fetched results controller
