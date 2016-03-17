@@ -64,6 +64,39 @@ class DataManager: NSObject, APIAccessorDelegate {
         return photos
     }
     
+    func hasLocalUsers() -> Bool {
+        let fetchRequest = NSFetchRequest()
+        let emergencyContactEntityDescription = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
+        fetchRequest.entity = emergencyContactEntityDescription
+        fetchRequest.includesSubentities = false
+        var error: NSError? = nil
+        let count = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        
+        return count > 0
+    }
+    
+    func hasLocalAlbums() -> Bool {
+        let fetchRequest = NSFetchRequest()
+        let emergencyContactEntityDescription = NSEntityDescription.entityForName("Album", inManagedObjectContext: managedObjectContext)
+        fetchRequest.entity = emergencyContactEntityDescription
+        fetchRequest.includesSubentities = false
+        var error: NSError? = nil
+        let count = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        
+        return count > 0
+    }
+    
+    func hasLocalPhotos() -> Bool {
+        let fetchRequest = NSFetchRequest()
+        let emergencyContactEntityDescription = NSEntityDescription.entityForName("Photo", inManagedObjectContext: managedObjectContext)
+        fetchRequest.entity = emergencyContactEntityDescription
+        fetchRequest.includesSubentities = false
+        var error: NSError? = nil
+        let count = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        
+        return count > 0
+    }
+    
     // MARK: - Getter for specific instances
     
     /**

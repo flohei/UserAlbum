@@ -21,7 +21,9 @@ class AlbumsViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewDidLoad()
         
         let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
-        dataManager.downloadAlbums()
+        if !dataManager.hasLocalAlbums() {
+            dataManager.downloadAlbums()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

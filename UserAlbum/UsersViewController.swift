@@ -21,7 +21,9 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         self.navigationItem.title = NSLocalizedString("USERS_TITLE", comment: "The title for the navigation item on the user table.")
         
         let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
-        dataManager.downloadUsers()
+        if !dataManager.hasLocalUsers() {
+            dataManager.downloadUsers()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {

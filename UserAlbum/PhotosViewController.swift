@@ -27,7 +27,9 @@ class PhotosViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
-        dataManager.downloadPhotos()
+        if !dataManager.hasLocalPhotos() {
+            dataManager.downloadPhotos()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
