@@ -19,6 +19,13 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // First, check if we already have any data and if not, acquire it.
+        let dataManager = DataManager()
+        if !dataManager.hasLocalUsers() {
+            dataManager.downloadUsers()
+        }
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
@@ -30,11 +37,6 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         
         // Set a localized title for this view controller
         self.navigationItem.title = NSLocalizedString("USERS_TITLE", comment: "The title for the navigation item on the user table.")
-        
-        let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
-        if !dataManager.hasLocalUsers() {
-            dataManager.downloadUsers()
-        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -73,7 +75,11 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if searchController.active {
+            return 1
+        } else {
+            return self.fetchedResultsController.sections?.count ?? 0
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

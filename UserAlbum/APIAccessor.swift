@@ -33,23 +33,18 @@ protocol APIAccessorDelegate {
 class APIAccessor: NSObject {
     /// The delegate that will be informed about new data and errors.
     var delegate: APIAccessorDelegate? = nil
-    /// The session objects that coordinates all the calls to the API.
-    var session: NSURLSession! = nil
     
     convenience init(delegate: APIAccessorDelegate) {
         self.init()
         self.delegate = delegate
-        
-        // Set up the session object and run the query.
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        session = NSURLSession(configuration: config)
     }
     
     /**
      Runs a query to the API for the given endpoint. This function downloads the JSON data and converts it into an array. This array will then be passed to the delegate of this class. If the process fails at some point the delegate will be handed the error.
      - parameter endpoint APIAccessorEndpoint: The endpoint that will be queried. Can be .Users, .Albums, or .Photos.
+     - parameter handler () -> Void: The handler to be called (locally) when the job is done.
      */
-    func queryAPIForEndpoint(endpoint: APIAccessorEndpoint) {
+    func queryAPIForEndpoint(endpoint: APIAccessorEndpoint, handler: (() -> Void)? = nil) {
         // Show the network activity indicator.
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
@@ -62,10 +57,14 @@ class APIAccessor: NSObject {
             return
         }
         
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        
         let task = session.dataTaskWithURL(theURL) { (data, response, error) -> Void in
             // Verify that we have valid data and no errors first.
-            if error != nil {
+            guard error == nil else {
                 self.returnError(error!)
+                return
             }
             
             guard let theData = data else {
@@ -86,6 +85,11 @@ class APIAccessor: NSObject {
             
             // Pass the newly acquired data to the delegate for further investigation.
             self.returnSuccess(result!, forEndpoint: endpoint)
+            
+            // Call the handler and let it know that we're done.
+            if handler != nil {
+                handler!()
+            }
         }
         
         task.resume()
@@ -100,10 +104,13 @@ class APIAccessor: NSObject {
             return
         }
         
-        theDelegate.accessor(self, didFailWithError: error)
-        
-        // Hide the network activity indicator.
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        // The delegate should handle the core data stuff on the same thread.
+        dispatch_async(dispatch_get_main_queue()) {
+            theDelegate.accessor(self, didFailWithError: error)
+            
+            // Hide the network activity indicator.
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
     }
     
     /** 
@@ -116,9 +123,11 @@ class APIAccessor: NSObject {
             return
         }
         
-        theDelegate.accessor(self, didFetchResults: dataArray, forEndpoint: endpoint)
-        
-        // Hide the network activity indicator.
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        dispatch_async(dispatch_get_main_queue()) {
+            theDelegate.accessor(self, didFetchResults: dataArray, forEndpoint: endpoint)
+            
+            // Hide the network activity indicator.
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
     }
 }

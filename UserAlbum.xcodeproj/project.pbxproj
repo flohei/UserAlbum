@@ -36,6 +36,7 @@
 		8F885CF41C99E49D0034BF33 /* Kingfisher.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8F885CDA1C99E3E10034BF33 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8F885CF71C99E7D90034BF33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F885CF91C99E7D90034BF33 /* Localizable.strings */; };
 		8F885CFE1C99EE320034BF33 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F885CFD1C99EE320034BF33 /* PhotoCell.swift */; };
+		8FAC038F1C9B2FE8000907E5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAC038E1C9B2FE8000907E5 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,7 @@
 		8F885CFB1C99E8130034BF33 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8F885CFC1C99E8E50034BF33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8F885CFD1C99EE320034BF33 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		8FAC038E1C9B2FE8000907E5 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				8F4C05BA1C988C8900162834 /* AppDelegate.swift */,
+				8FAC038E1C9B2FE8000907E5 /* CoreDataStack.swift */,
 				8F4C05FC1C989B6300162834 /* DataManager.swift */,
 				8F4C05FA1C988FB200162834 /* APIAccessor.swift */,
 			);
@@ -542,6 +545,7 @@
 				8F885CC51C99973D0034BF33 /* UserCell.swift in Sources */,
 				8F4C05F41C988F9400162834 /* Album.swift in Sources */,
 				8F4C05F61C988F9400162834 /* User.swift in Sources */,
+				8FAC038F1C9B2FE8000907E5 /* CoreDataStack.swift in Sources */,
 				8F4C05F81C988F9400162834 /* _Photo.swift in Sources */,
 				8F4C06011C98AC9700162834 /* PhotosViewController.swift in Sources */,
 				8F4C05FF1C98AC8C00162834 /* AlbumsViewController.swift in Sources */,

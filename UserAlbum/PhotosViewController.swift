@@ -21,14 +21,15 @@ class PhotosViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // First, check if we already have any data and if not, acquire it.
+        let dataManager = DataManager()
+        if !dataManager.hasLocalPhotos() {
+            dataManager.downloadPhotos()
+        }
+        
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
-        
-        let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
-        if !dataManager.hasLocalPhotos() {
-            dataManager.downloadPhotos()
         }
     }
     

@@ -16,11 +16,12 @@ class AlbumsViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     var managedObjectContext: NSManagedObjectContext? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dataManager = (UIApplication.sharedApplication().delegate as! AppDelegate).dataManager
+        // First, check if we already have any data and if not, acquire it.
+        let dataManager = DataManager()
         if !dataManager.hasLocalAlbums() {
             dataManager.downloadAlbums()
         }
