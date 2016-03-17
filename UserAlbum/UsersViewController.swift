@@ -9,13 +9,24 @@
 import UIKit
 import CoreData
 
-class UsersViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class UsersViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
+    /// The context for our local database.
     var managedObjectContext: NSManagedObjectContext? = nil
+    /// The array that holds only the filtered users according to the user's entered search term.
+    var filteredUsers = [User]()
+    /// The search controller used to handle the search table.
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        // Configure the search bar.
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        self.tableView.tableHeaderView = searchController.searchBar
         
         // Set a localized title for this view controller
         self.navigationItem.title = NSLocalizedString("USERS_TITLE", comment: "The title for the navigation item on the user table.")
@@ -43,16 +54,35 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
             }
         }
     }
+    
+    // MARK: - Filtering
+    
+    func filterContentForSearchText(searchText: String) {
+        // Filter the array using the filter method; only filtering by name for now.
+        let users = fetchedResultsController.fetchedObjects as! [User]?
+        filteredUsers = users!.filter({ (user: User) -> Bool in
+            return user.name?.rangeOfString(searchText) != nil
+        })
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+        tableView.reloadData()
+    }
 
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.fetchedResultsController.sections?.count ?? 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
+        if searchController.active {
+            return filteredUsers.count
+        } else {
+            let sectionInfo = self.fetchedResultsController.sections![section]
+            return sectionInfo.numberOfObjects
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -83,8 +113,14 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     }
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        (cell as? UserCell)?.user = object as? User
+        let user: User
+        if searchController.active {
+            user = filteredUsers[indexPath.row]
+        } else {
+            user = self.fetchedResultsController.objectAtIndexPath(indexPath) as! User
+        }
+
+        (cell as? UserCell)?.user = user
     }
 
     // MARK: - Fetched results controller
