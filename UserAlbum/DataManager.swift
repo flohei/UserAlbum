@@ -208,7 +208,7 @@ class DataManager: NSObject, APIAccessorDelegate {
                 let catchPhrase = theCompany["catchPhrase"] as? String
                 
                 let newUser = User(managedObjectContext: managedObjectContext)
-                newUser.identifier = identifier
+                newUser.identifier = theIdentifier
                 newUser.name = name
                 newUser.email = email
                 newUser.companyCatchPhrase = catchPhrase
@@ -242,7 +242,7 @@ class DataManager: NSObject, APIAccessorDelegate {
                 }
                 
                 let newAlbum = Album(managedObjectContext: managedObjectContext)
-                newAlbum.identifier = identifier
+                newAlbum.identifier = theIdentifier
                 newAlbum.title = title
                 newAlbum.user = theUser
                 
@@ -282,7 +282,7 @@ class DataManager: NSObject, APIAccessorDelegate {
                 }
                 
                 let newPhoto = Photo(managedObjectContext: managedObjectContext)
-                newPhoto.identifier = identifier
+                newPhoto.identifier = theIdentifier
                 newPhoto.album = theAlbum
                 newPhoto.title = title
                 newPhoto.url = imageAddress
