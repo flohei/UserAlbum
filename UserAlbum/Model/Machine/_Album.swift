@@ -52,14 +52,40 @@ class _Album: NSManagedObject {
     // MARK: - Relationships
 
     @NSManaged public
-    var photos: Photo?
-
-    // func validatePhotos(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+    var photos: NSSet
 
     @NSManaged public
     var user: User?
 
     // func validateUser(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+}
+
+extension _Album {
+
+    func addPhotos(objects: NSSet) {
+        let mutable = self.photos.mutableCopy() as! NSMutableSet
+        mutable.unionSet(objects as Set<NSObject>)
+        self.photos = mutable.copy() as! NSSet
+    }
+
+    func removePhotos(objects: NSSet) {
+        let mutable = self.photos.mutableCopy() as! NSMutableSet
+        mutable.minusSet(objects as Set<NSObject>)
+        self.photos = mutable.copy() as! NSSet
+    }
+
+    func addPhotosObject(value: Photo!) {
+        let mutable = self.photos.mutableCopy() as! NSMutableSet
+        mutable.addObject(value)
+        self.photos = mutable.copy() as! NSSet
+    }
+
+    func removePhotosObject(value: Photo!) {
+        let mutable = self.photos.mutableCopy() as! NSMutableSet
+        mutable.removeObject(value)
+        self.photos = mutable.copy() as! NSSet
+    }
 
 }
 
