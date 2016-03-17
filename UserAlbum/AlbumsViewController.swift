@@ -12,7 +12,7 @@ import CoreData
 class AlbumsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     var user: User? = nil {
         didSet {
-            self.navigationItem.title = user?.identifier?.stringValue
+            self.navigationItem.title = user?.name
         }
     }
     var managedObjectContext: NSManagedObjectContext? = nil

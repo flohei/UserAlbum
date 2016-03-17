@@ -12,7 +12,7 @@ import CoreData
 class PhotosViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     var album: Album? = nil {
         didSet {
-            self.navigationItem.title = album?.identifier?.stringValue
+            self.navigationItem.title = album?.title
         }
     }
     var detailViewController: DetailViewController? = nil
